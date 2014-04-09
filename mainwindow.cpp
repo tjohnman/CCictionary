@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&loadingDialog, SIGNAL(finished(int)), this, SLOT(loadingComplete()));
 
     connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(onSelectionChanged(QModelIndex)));
+
 }
 
 MainWindow::~MainWindow()
@@ -25,6 +26,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::doSearch()
 {
+    ui->lineEdit->setEnabled(false);
     _m_DataModel->search(ui->lineEdit->text());
     ui->listView->reset();
 }
@@ -49,8 +51,14 @@ void MainWindow::onSelectionChanged(QModelIndex index)
 void MainWindow::loadingComplete()
 {
     _m_DataModel = new DataModel(loadingDialog.m_Lines, ui->listView);
+    connect(_m_DataModel, SIGNAL(searchFinished()), this, SLOT(onSearchFinished()));
     ui->listView->setModel(_m_DataModel);
     show();
+}
+
+void MainWindow::onSearchFinished()
+{
+    ui->lineEdit->setEnabled(true);
 }
 
 void MainWindow::loadDictionary()

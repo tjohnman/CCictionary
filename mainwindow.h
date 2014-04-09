@@ -22,6 +22,7 @@ public:
 
 public slots:
     void doSearch();
+    void onSearchFinished();
     void loadingComplete();
     void onSelectionChanged(QModelIndex index);
 

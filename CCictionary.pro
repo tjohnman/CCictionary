@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     dialogloading.cpp \
     dialogloadingworker.cpp \
     datamodel.cpp \
-    term.cpp
+    term.cpp \
+    searchworker.cpp
 
 HEADERS  += mainwindow.h \
     dialogloading.h \
     dialogloadingworker.h \
     datamodel.h \
-    term.h
+    term.h \
+    searchworker.h
 
 FORMS    += mainwindow.ui \
     dialogloading.ui

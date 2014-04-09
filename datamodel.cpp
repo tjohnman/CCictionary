@@ -1,4 +1,5 @@
 #include "datamodel.h"
+#include "term.h"
 
 #include <QtDebug>
 
@@ -6,6 +7,9 @@ DataModel::DataModel(QStringList lines, QObject *parent) : QAbstractListModel(pa
 {
     _m_Lines = QStringList(lines);
     _m_Results = QStringList();
+
+    connect(&_m_SearchWorker, SIGNAL(finished()), this, SLOT(onSearchFinished()));
+    connect(&_m_SearchWorker, SIGNAL(addedRow()), this, SLOT(onRowAdded()));
 }
 
 Qt::ItemFlags DataModel::flags(const QModelIndex &index) const
@@ -50,22 +54,18 @@ int DataModel::rowCount(const QModelIndex &parent) const
     return _m_Results.size();
 }
 
-int DataModel::search(QString query)
+void DataModel::search(QString query)
 {
-    _m_Results.clear();
+    _m_SearchWorker.init(query, &_m_Lines, &_m_Results);
+    _m_SearchWorker.start();
+}
 
-    for(unsigned int i=0; i<_m_Lines.size(); ++i)
-    {
-        QStringList words = query.split(" ", QString::SkipEmptyParts, Qt::CaseInsensitive);
-        for(unsigned int j=0; j<words.size(); ++j)
-        {
-            if(_m_Lines[i].contains(words[j]))
-            {
-                _m_Results.push_back(_m_Lines[i]);
-                break;
-            }
-        }
-    }
+void DataModel::onRowAdded()
+{
+    emit dataChanged(createIndex(0, 0), createIndex(_m_Results.size()-1, 0));
+}
 
-    return _m_Results.size();
+void DataModel::onSearchFinished()
+{
+    emit searchFinished();
 }

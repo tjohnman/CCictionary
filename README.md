@@ -14,7 +14,7 @@ It's main highlights are:
 
 ###Binary builds
 
-Not yet.
+[Here](https://github.com/tjohnman/CCictionary/releases).
 
 ###Licenses
 

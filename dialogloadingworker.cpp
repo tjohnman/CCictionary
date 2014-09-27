@@ -7,6 +7,13 @@ void DialogLoadingWorker::run()
 {
     qDebug() << "Opening cedict_ts.u8... ";
     QFile dictFile("cedict_ts.u8");
+
+    if(!dictFile.exists())
+    {
+        emit loadFailed();
+        return;
+    }
+
     if(dictFile.open(QIODevice::ReadOnly))
     {
         emit gotFileSize(dictFile.size());
@@ -22,5 +29,7 @@ void DialogLoadingWorker::run()
         }
 
         dictFile.close();
+
+        emit loadSucceeded();
     }
 }

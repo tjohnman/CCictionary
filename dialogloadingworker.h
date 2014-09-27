@@ -13,6 +13,8 @@ public:
 signals:
     void gotFileSize(int size);
     void readLine(int filePos, QString line);
+    void loadFailed();
+    void loadSucceeded();
 };
 
 #endif // DIALOGLOADINGWORKER_H

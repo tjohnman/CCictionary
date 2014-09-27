@@ -13,10 +13,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->pushButton, SIGNAL(clicked()), SLOT(doSearch()));
     connect(ui->lineEdit, SIGNAL(returnPressed()), SLOT(doSearch()));
-    connect(&loadingDialog, SIGNAL(finished(int)), this, SLOT(loadingComplete()));
+    connect(&loadingDialog, SIGNAL(succeeded()), this, SLOT(loadingComplete()));
+    connect(&loadingDialog, SIGNAL(failed()), this, SLOT(loadingFailed()));
 
     connect(ui->listView, SIGNAL(clicked(QModelIndex)), this, SLOT(onSelectionChanged(QModelIndex)));
 
+    ui->searchProgressBar->hide();
+
+    msgBox = 0;
 }
 
 MainWindow::~MainWindow()
@@ -27,6 +31,8 @@ MainWindow::~MainWindow()
 void MainWindow::doSearch()
 {
     ui->lineEdit->setEnabled(false);
+    ui->pushButton->hide();
+    ui->searchProgressBar->show();
     _m_DataModel->search(ui->lineEdit->text());
     ui->listView->reset();
 }
@@ -48,6 +54,16 @@ void MainWindow::onSelectionChanged(QModelIndex index)
     }
 }
 
+void MainWindow::loadingFailed()
+{
+    if(msgBox) delete msgBox;
+    msgBox = new QMessageBox();
+    msgBox->setText("The file \"cedict_ts.u8\" could not be loaded.");
+    msgBox->setIcon(QMessageBox::Critical);
+    msgBox->setDetailedText("Please make sure the dictionary file is in the same directory as this application and that you have permissions to read it.");
+    msgBox->show();
+}
+
 void MainWindow::loadingComplete()
 {
     _m_DataModel = new DataModel(loadingDialog.m_Lines, ui->listView);
@@ -59,6 +75,8 @@ void MainWindow::loadingComplete()
 void MainWindow::onSearchFinished()
 {
     ui->lineEdit->setEnabled(true);
+    ui->searchProgressBar->hide();
+    ui->pushButton->show();
 }
 
 void MainWindow::loadDictionary()

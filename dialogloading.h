@@ -19,10 +19,15 @@ public:
 
     QStringList m_Lines;
 
+signals:
+    void succeeded();
+    void failed();
+
 public slots:
     void workerDone();
     void onLineRead(int filePos, QString line);
     void onGotFileSize(int size);
+    void onLoadFailed();
 
 private:
     Ui::DialogLoading *ui;

@@ -60,7 +60,7 @@ void MainWindow::loadingFailed()
     msgBox = new QMessageBox();
     msgBox->setText("The file \"cedict_ts.u8\" could not be loaded.");
     msgBox->setIcon(QMessageBox::Critical);
-    msgBox->setDetailedText("Please make sure the dictionary file is in the same directory as this application and that you have permissions to read it. You can download it here: http://www.mdbg.net/chindict/chindict.php?page=cedict. Make sure to rename it as necessary.");
+    msgBox->setDetailedText("Please make sure the dictionary file is in the same directory as this application (that means inside the .app bundle on OS X) and that you have permissions to read it. You can download it here: http://www.mdbg.net/chindict/chindict.php?page=cedict. Make sure to uncompress it as necessary.");
     msgBox->show();
 }
 

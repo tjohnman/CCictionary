@@ -2,6 +2,8 @@
 
 #include <QtDebug>
 #include <QFile>
+#include <QFileInfo>
+#include <QDir>
 
 void DialogLoadingWorker::run()
 {
@@ -10,6 +12,7 @@ void DialogLoadingWorker::run()
 
     if(!dictFile.exists())
     {
+        qDebug() << QFileInfo(dictFile).absoluteFilePath();
         emit loadFailed();
         return;
     }

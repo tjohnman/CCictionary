@@ -1,7 +1,7 @@
 CCictionary
 ===========
 
-###What is this?
+### What is this?
 
 A clean and convenient Chinese/English English/Chinese dictionary that uses CC-CEDICT. It aims to be clean without sacrificing being comfortable to use.
 
@@ -12,11 +12,11 @@ It's main highlights are:
 - Fast. Not that it is optimized, but it contains the least possible nonsense.
 - It uses [CC-CEDICT](http://cc-cedict.org/wiki/), making it 100% free of hassles.
 
-###Binary builds
+### Binary builds
 
 [Here](https://github.com/tjohnman/CCictionary/releases).
 
-###Licenses
+### Licenses
 
 CC-CEDICT is licensed under [Creative Commons Attribution-Share Alike 3.0 License](http://creativecommons.org/licenses/by-sa/3.0/).
 

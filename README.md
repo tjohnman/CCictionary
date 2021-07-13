@@ -1,6 +1,8 @@
 CCictionary
 ===========
 
+![Screenshot](https://cloud.githubusercontent.com/assets/788264/4430355/d9ddec82-462a-11e4-999d-a8008b332fb3.png)
+
 ### What is this?
 
 A clean and convenient Chinese/English English/Chinese dictionary that uses CC-CEDICT. It aims to be clean without sacrificing being comfortable to use.

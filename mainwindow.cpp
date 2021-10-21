@@ -30,10 +30,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::doSearch()
 {
+    QString searchTerms = ui->lineEdit->text();
+
+    if (searchTerms.isEmpty()) {
+        return;
+    }
+
     ui->lineEdit->setEnabled(false);
     ui->pushButton->hide();
     ui->searchProgressBar->show();
-    _m_DataModel->search(ui->lineEdit->text());
+    _m_DataModel->search(searchTerms);
     ui->listView->reset();
 }
 

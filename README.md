@@ -16,7 +16,11 @@ It's main highlights are:
 
 ### Binary builds
 
-[Here](https://github.com/tjohnman/CCictionary/releases).
+#### Requirements
+Make sure to install [the Visual C++ Redistibutable runtime](https://aka.ms/vs/16/release/vc_redist.x64.exe).
+
+#### Download
+Get the latest version [here](https://github.com/tjohnman/CCictionary/releases).
 
 ### Licenses
 
